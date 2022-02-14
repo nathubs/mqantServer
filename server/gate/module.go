@@ -66,7 +66,7 @@ func (this *Gate) DisConnect(session gate.Session) {
 是否需要对本次客户端请求进行跟踪
 */
 func (gate *Gate) OnRequestTracing(session gate.Session, topic string, msg []byte) bool {
-	if session.GetUserId() == "" {
+	if session.GetUserID() == "" {
 		//没有登陆的用户不跟踪
 		return false
 	}

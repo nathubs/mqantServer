@@ -2,7 +2,7 @@
     "Master":{
         "Enable":false,
         "MasterType":"Master",
-        "WebRoot":"/work/go/mqantserver/bin/console",
+        "WebRoot":"/mnt/c/stduy/go/mqantserver/bin/console",
         "WebHost":"0.0.0.0:8686",
         "SSH":[
 
@@ -29,6 +29,12 @@
                     }
                 }
             ],
+      "httpgate":[
+        {
+          "Id":"httpgate001",
+          "ProcessID":"development"
+        }
+      ],
         "Master":[
                         {
                             "Id":"Master001",
@@ -85,7 +91,7 @@
                             "Id":"Webapp001",
                             "ProcessID":"development",
                             "Settings":{
-                                "StaticPath":"/work/go/mqantserver/bin"
+                                "StaticPath":"/mnt/c/stduy/go/mqantserver/bin"
                             }
                         }
                 ],
@@ -94,7 +100,7 @@
                                     "Id":"Tracing001",
                                     "ProcessID":"development",
                                     "Settings":{
-                                        "StoreFile":     "/tmp/appdash.gob",
+                                        "StoreFile":     "/mnt/c/stduy/go/mqantserver/bin/appdash.gob",
                                         "URL":     	 "http://localhost:7700",
                                         "CollectorAddr":":7701",
                                         "HTTPAddr":   ":7700"

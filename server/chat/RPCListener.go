@@ -30,8 +30,8 @@ type Listener struct {
 
 func (l *Listener) BeforeHandle(fn string, callInfo *mqrpc.CallInfo) error {
 	//放行
-	for i, Type := range callInfo.RpcInfo.ArgsType {
-		v, err := argsutil.Bytes2Args(l.module.GetApp(), Type, callInfo.RpcInfo.Args[i])
+	for i, Type := range callInfo.RPCInfo.ArgsType {
+		v, err := argsutil.Bytes2Args(l.module.GetApp(), Type, callInfo.RPCInfo.Args[i])
 		if err != nil {
 			log.Error("BeforeHandle %v", err)
 			continue
@@ -43,7 +43,7 @@ func (l *Listener) BeforeHandle(fn string, callInfo *mqrpc.CallInfo) error {
 				if v2 == nil {
 					return fmt.Errorf("session 不能为nil")
 				}
-				if v2.GetUserId() == "" {
+				if v2.GetUserID() == "" {
 					return fmt.Errorf("必须先登录账号")
 				}
 			}

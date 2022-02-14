@@ -63,20 +63,20 @@ func (m *Chat) joinChat(session gate.Session, msg map[string]interface{}) (resul
 		return
 	}
 	log.TInfo(session, "session %v", session.GetSettings())
-	if session.GetUserId() == "" {
+	if session.GetUserID() == "" {
 		err = "Not Logined"
 		return
 	}
 	time.Sleep(time.Millisecond * 10)
 	roomName := msg["roomName"].(string)
-	r, e := m.RpcInvoke("Login", "track", session)
+	r, e := m.Invoke("Login", "track", session)
 
 	log.TInfo(session, "演示模块间RPC调用 :", r, e)
 
 	userList := m.chats[roomName]
 	if userList == nil {
 		//添加一个新的房间
-		userList = map[string]gate.Session{session.GetUserId(): session}
+		userList = map[string]gate.Session{session.GetUserID(): session}
 		m.chats[roomName] = userList
 	} else {
 		//user:=userList[session.Userid]
@@ -87,27 +87,27 @@ func (m *Chat) joinChat(session gate.Session, msg map[string]interface{}) (resul
 		//return
 		//}
 		//添加这个用户进入聊天室
-		userList[session.GetUserId()] = session
+		userList[session.GetUserID()] = session
 	}
 
 	rmsg := map[string]interface{}{}
 	rmsg["roomName"] = roomName
-	rmsg["user"] = session.GetUserId()
+	rmsg["user"] = session.GetUserID()
 	b, _ := json.Marshal(rmsg)
 
 	userL := make([]string, len(userList))
 	//广播添加用户信息到该房间的所有用户
 	i := 0
 	for _, user := range userList {
-		if user.GetUserId() != session.GetUserId() {
+		if user.GetUserID() != session.GetUserID() {
 			//给其他用户发送消息
 			err := user.Send("Chat/OnJoin", b)
 			if err != "" {
 				//信息没有发送成功
-				m.onLeave(roomName, user.GetUserId())
+				m.onLeave(roomName, user.GetUserID())
 			}
 		}
-		userL[i] = user.GetUserId()
+		userL[i] = user.GetUserID()
 		i++
 
 	}
@@ -122,7 +122,7 @@ func (m *Chat) say(session gate.Session, msg map[string]interface{}) (result map
 		err = "roomName or say cannot be nil"
 		return
 	}
-	if session.GetUserId() == "" {
+	if session.GetUserID() == "" {
 		err = "Not Logined"
 		return
 	}
@@ -135,14 +135,14 @@ func (m *Chat) say(session gate.Session, msg map[string]interface{}) (result map
 		err = "No room"
 		return
 	} else {
-		user := userList[session.GetUserId()]
+		user := userList[session.GetUserID()]
 		if user == nil {
 			err = "You haven't been in the room yet"
 			return
 		}
 		rmsg := map[string]string{}
 		rmsg["roomName"] = roomName
-		rmsg["from"] = session.GetUserId()
+		rmsg["from"] = session.GetUserID()
 		rmsg["target"] = target
 		rmsg["msg"] = content
 		b, _ := json.Marshal(rmsg)
@@ -152,7 +152,7 @@ func (m *Chat) say(session gate.Session, msg map[string]interface{}) (result map
 				err := user.Send("Chat/OnChat", b)
 				if err != "" {
 					//信息没有发送成功
-					m.onLeave(roomName, user.GetUserId())
+					m.onLeave(roomName, user.GetUserID())
 				}
 			}
 		} else {
@@ -164,7 +164,7 @@ func (m *Chat) say(session gate.Session, msg map[string]interface{}) (result map
 			e := user.Send("Chat/OnChat", b)
 			if e != "" {
 				//信息没有发送成功
-				m.onLeave(roomName, user.GetUserId())
+				m.onLeave(roomName, user.GetUserID())
 				err = "The user has left the room"
 				return
 			}

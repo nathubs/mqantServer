@@ -21,7 +21,7 @@ import (
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	"github.com/liangdas/armyant/task"
 	"github.com/liangdas/armyant/work"
-	"github.com/liangdas/mqant/utils"
+	utils "github.com/liangdas/mqant/utils"
 	"io/ioutil"
 	"time"
 )
@@ -31,7 +31,7 @@ func NewWork(manager *Manager) *Work {
 	this.manager = manager
 	//opts:=this.GetDefaultOptions("tls://127.0.0.1:3563")
 	//opts := this.GetDefaultOptions("tcp://127.0.0.1:3563")
-	opts := this.GetDefaultOptions("ws://127.0.0.1:3653")
+	opts := this.GetDefaultOptions("ws://172.18.102.92:3653")
 	opts.SetConnectionLostHandler(func(client MQTT.Client, err error) {
 		fmt.Println("ConnectionLost", err.Error())
 	})

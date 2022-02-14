@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/liangdas/mqant/conf"
 	"github.com/liangdas/mqant/gate"
+	"github.com/liangdas/mqant/log"
 	"github.com/liangdas/mqant/module"
 	"github.com/liangdas/mqant/module/base"
 )
@@ -35,6 +36,9 @@ func (m *HellWorld) OnInit(app module.App, settings *conf.ModuleSettings) {
 }
 
 func (m *HellWorld) Run(closeSig chan bool) {
+	log.Info("HelloWorld Run")
+	<-closeSig
+	log.Info("HelloWorld Over")
 
 }
 

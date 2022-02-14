@@ -72,7 +72,7 @@ func (m *Login) track(session gate.Session) (result string, err string) {
 	//演示后台模块间的rpc调用
 	time.Sleep(time.Millisecond * 10)
 	log.TInfo(session, "Login %v", "track1")
-	m.RpcInvoke("Login", "track2", session)
+	m.Invoke("Login", "track2", session)
 	return fmt.Sprintf("My is Login Module %s"), ""
 }
 
@@ -82,7 +82,7 @@ func (m *Login) track2(session gate.Session) (result string, err string) {
 	log.TInfo(session, "Login %v", "track2")
 	r := rand.Intn(100)
 	if r > 30 {
-		m.RpcInvoke("Login", "track3", session)
+		m.Invoke("Login", "track3", session)
 	}
 
 	return fmt.Sprintf("My is Login Module"), ""

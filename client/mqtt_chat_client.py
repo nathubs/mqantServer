@@ -25,7 +25,7 @@ def on_message(client, userdata, msg):
     #payload = json.loads(msg.payload.decode())
     #print(payload.get("user")+":"+payload.get("say"))
 def mylog(self,userdata,level, buf):
-    print buf
+    print (buf)
 
 if __name__ == '__main__':
     client = mqtt.Client(protocol=mqtt.MQTTv31)

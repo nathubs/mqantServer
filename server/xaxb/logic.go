@@ -15,7 +15,7 @@ package xaxb
 
 import (
 	"fmt"
-	"github.com/liangdas/mqant/utils"
+	utils "github.com/liangdas/mqant/utils"
 	"github.com/liangdas/mqantserver/server/xaxb/objects"
 	"math"
 )
