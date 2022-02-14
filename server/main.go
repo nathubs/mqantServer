@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/liangdas/mqant"
 	"github.com/nathubs/mqantserver/server/httpgate"
+
+	//"github.com/nathubs/mqantserver/server/httpgate"
 	"github.com/nats-io/nats.go"
 
 	//"github.com/liangdas/mqant-modules/tracing"
@@ -82,7 +84,7 @@ func main() {
 		user.Module(),
 		webapp.Module(),
 		xaxb.Module(),
-		httpgate.Module(),
+		//httpgate.Module(),
 		//tracing.Module(), //很多初学者不会改文件路径，先移除了
 	) //这是聊天模块
 
