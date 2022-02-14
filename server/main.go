@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/liangdas/mqant"
-	"github.com/nathubs/mqantserver/server/httpgate"
+	//"github.com/nathubs/mqantserver/server/httpgate"
 
 	//"github.com/nathubs/mqantserver/server/httpgate"
 	"github.com/nats-io/nats.go"
