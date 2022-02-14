@@ -51,7 +51,7 @@ func Statushandler(w http.ResponseWriter, r *http.Request) {
 }
 func (self *Web) Run(closeSig chan bool) {
 	//这里如果出现异常请检查8080端口是否已经被占用
-	l, err := net.Listen("tcp", ":8080")
+	l, err := net.Listen("tcp", ":8088")
 	if err != nil {
 		log.Error("webapp server error", err.Error())
 		return
